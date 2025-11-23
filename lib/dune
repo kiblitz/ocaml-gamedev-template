@@ -1,5 +1,5 @@
 (library
  (name ocaml_gamedev_template_lib)
- (libraries core)
+ (libraries core raylib)
  (preprocess
   (pps ppx_jane)))

@@ -1,0 +1,4 @@
+(executable
+ (public_name ocaml_gamedev_template)
+ (name main)
+ (libraries core ocaml_gamedev_template_lib))

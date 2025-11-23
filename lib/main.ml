@@ -17,11 +17,13 @@ let run () =
   setup ();
   let initial_state = State.create () in
   let rec loop state =
-    match (State.update state : State.t State.With_status.t) with
-    | Continue state -> loop state
-    | Finished state -> on_exit state
-    | Finished_with_error { value = state; error } ->
-      [ on_exit state; Error error ] |> Or_error.all_unit
+    let delta_time = Raylib.get_frame_time () |> Time_ns.Span.of_sec in
+    let { With_game_event.value = state; game_event } = State.update ~delta_time state in
+    State.draw state;
+    match (game_event : State.Event.t) with
+    | Continue -> loop state
+    | Finished -> on_exit state
+    | Finished_with_error error -> [ on_exit state; Error error ] |> Or_error.all_unit
   in
   loop initial_state
 ;;

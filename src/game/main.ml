@@ -1,4 +1,5 @@
 open! Core
+open Import
 
 let name = "OCaml Gamedev Template"
 

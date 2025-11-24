@@ -1,0 +1,5 @@
+(library
+ (name ocaml_gamedev_template_camera)
+ (libraries core ocaml_gamedev_template_common raylib)
+ (preprocess
+  (pps ppx_jane)))

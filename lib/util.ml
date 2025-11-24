@@ -15,7 +15,7 @@ module Draw = struct
 end
 
 module Smooth = struct
-  let float_of_time_span = Time_ns.Span.to_ms
+  let float_of_time_span = Time_ns.Span.to_sec
 
   let lerp ~current ~target ~c ~delta_time =
     let delta_time = float_of_time_span delta_time in

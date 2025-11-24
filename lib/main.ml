@@ -8,6 +8,7 @@ let setup () =
   Raylib.set_target_fps
     (let reasonable_starting_fps = 60 in
      reasonable_starting_fps);
+  Raylib.set_exit_key Raylib.Key.Null;
   ()
 ;;
 
@@ -19,7 +20,7 @@ let run () =
   let rec loop state =
     let delta_time = Raylib.get_frame_time () |> Time_ns.Span.of_sec in
     let { With_game_event.value = state; game_event } = State.update ~delta_time state in
-    State.draw state;
+    Util.Draw.with_drawing (fun () -> State.draw state);
     match (game_event : State.Event.t) with
     | Continue -> loop state
     | Finished -> on_exit state

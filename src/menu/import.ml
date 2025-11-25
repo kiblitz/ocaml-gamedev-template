@@ -7,4 +7,3 @@ include struct
 end
 
 module Camera = Ocaml_gamedev_template_camera
-module Menu = Ocaml_gamedev_template_menu

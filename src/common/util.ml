@@ -6,12 +6,6 @@ module Draw = struct
     f ();
     Raylib.end_drawing ()
   ;;
-
-  let with_2d_camera f ~camera =
-    Raylib.begin_mode_2d camera;
-    f ();
-    Raylib.end_mode_2d ()
-  ;;
 end
 
 module Smooth = struct

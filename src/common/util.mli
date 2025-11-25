@@ -2,7 +2,6 @@ open! Core
 
 module Draw : sig
   val with_drawing : (unit -> unit) -> unit
-  val with_2d_camera : (unit -> unit) -> camera:Raylib.Camera2D.t -> unit
 end
 
 module Smooth : sig

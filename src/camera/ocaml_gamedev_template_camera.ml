@@ -1,1 +1,1 @@
-module Camera = Camera
+include Camera

@@ -11,4 +11,4 @@
  (action
   (with-stdout-to
    %{target}
-   (run ocaml-crunch -m plain ../../resources))))
+   (run ocaml-crunch -m plain %{workspace_root}/resources))))

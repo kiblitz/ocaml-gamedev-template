@@ -1,10 +1,10 @@
 (library
  (name ocaml_gamedev_template_lib)
  (libraries
+  camera
+  common
   core
-  ocaml_gamedev_template_camera
-  ocaml_gamedev_template_common
-  ocaml_gamedev_template_menu
+  menu
   raylib)
  (preprocess
   (pps ppx_jane)))

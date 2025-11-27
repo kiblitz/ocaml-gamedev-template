@@ -1,11 +1,8 @@
 include struct
-  open Ocaml_gamedev_template_common
+  open Common
   module Bounds = Bounds
   module Game_object_intf = Game_object_intf
   module Util = Util
   module With_game_event = With_game_event
   module Resource_manager = Resource_manager
 end
-
-module Button = Ocaml_gamedev_template_button
-module Camera = Ocaml_gamedev_template_camera

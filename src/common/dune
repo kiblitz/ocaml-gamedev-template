@@ -1,5 +1,5 @@
 (library
- (name ocaml_gamedev_template_common)
+ (name common)
  (libraries core core_kernel.total_map raylib)
  (preprocess
   (pps ppx_jane)))

@@ -1,5 +1,5 @@
 include struct
-  open Ocaml_gamedev_template_common
+  open Common
   module Bounds = Bounds
   module Game_object_intf = Game_object_intf
   module Util = Util

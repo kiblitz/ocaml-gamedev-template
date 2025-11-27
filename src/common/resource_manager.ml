@@ -26,7 +26,7 @@ module Resource = struct
           | ButtonLong_beige_pressed
           | ButtonLong_grey
           | ButtonLong_grey_pressed
-        [@@deriving bin_io, compare, enumerate, sexp, variants]
+        [@@deriving compare, enumerate, sexp_of, variants]
 
         let file_type = ".png"
       end
@@ -36,11 +36,11 @@ module Resource = struct
     end
 
     module T = struct
-      type t = Png of Png.t [@@deriving bin_io, compare, enumerate, sexp, variants]
+      type t = Png of Png.t [@@deriving compare, enumerate, sexp_of, variants]
     end
 
     include T
-    module Total_map = Total_map.Make (T)
+    include Total_map.Make_for_include_functor_plain (T)
 
     let filename = function
       | Png png -> Png.filename png

@@ -1,5 +1,13 @@
 open! Core
 
+module Collision = struct
+  let point_in_bounds ~x ~y ~bounds =
+    let point = Raylib.Vector2.create x y in
+    let rect = Bounds.to_rect bounds in
+    Raylib.check_collision_point_rec point rect
+  ;;
+end
+
 module Draw = struct
   let with_drawing f =
     Raylib.begin_drawing ();
@@ -42,7 +50,7 @@ module Draw = struct
       in
       Raylib.Vector2.create x y
     in
-    let dest = Bounds.to_rect dest in
+    let dest = Bounds.Expert.to_rect_account_for_origin dest in
     Raylib.draw_texture_pro
       texture
       (Bounds.to_rect source)

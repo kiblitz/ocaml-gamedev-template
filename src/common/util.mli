@@ -1,5 +1,9 @@
 open! Core
 
+module Collision : sig
+  val point_in_bounds : x:float -> y:float -> bounds:Bounds.t -> bool
+end
+
 module Draw : sig
   val with_drawing : (unit -> unit) -> unit
 

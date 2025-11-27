@@ -11,6 +11,8 @@ val create
   -> Bounds.t
   -> t
 
+val transform_to_screen_position : t -> x:float -> y:float -> float * float
+val transform_from_screen_position : t -> x:float -> y:float -> float * float
 val draw_with : t -> f:(unit -> unit) -> unit
 
 include Game_object_intf.Updatable.S with type t := t and type event := unit

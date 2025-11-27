@@ -1,8 +1,7 @@
 (library
- (name ocaml_gamedev_template_menu)
+ (name ocaml_gamedev_template_button)
  (libraries
   core
-  ocaml_gamedev_template_button
   ocaml_gamedev_template_camera
   ocaml_gamedev_template_common
   raylib)

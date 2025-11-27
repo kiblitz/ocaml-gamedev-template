@@ -27,6 +27,18 @@ let create
   }
 ;;
 
+let transform_to_screen_position t ~x ~y =
+  let position = Raylib.Vector2.create x y in
+  let screen_position = Raylib.get_world_to_screen_2d position t.raylib_camera in
+  Raylib.Vector2.x screen_position, Raylib.Vector2.y screen_position
+;;
+
+let transform_from_screen_position t ~x ~y =
+  let position = Raylib.Vector2.create x y in
+  let screen_position = Raylib.get_screen_to_world_2d position t.raylib_camera in
+  Raylib.Vector2.x screen_position, Raylib.Vector2.y screen_position
+;;
+
 let draw_with t ~f =
   Raylib.begin_mode_2d t.raylib_camera;
   f ();

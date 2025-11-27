@@ -6,7 +6,6 @@ type t =
   ; width : float
   ; height : float
   }
+[@@deriving fields ~getters]
 
-let to_rect { x; y; width; height } =
-  Raylib.Rectangle.create (x /. 2.) (y /. 2.) width height
-;;
+let to_rect { x; y; width; height } = Raylib.Rectangle.create x y width height

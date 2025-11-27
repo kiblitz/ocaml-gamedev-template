@@ -13,6 +13,6 @@ module Drawable = struct
   module type S = sig
     type t
 
-    val draw : t -> unit
+    val draw : t -> resource_manager:Resource_manager.t -> unit
   end
 end

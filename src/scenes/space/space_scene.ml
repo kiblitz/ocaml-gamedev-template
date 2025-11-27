@@ -2,6 +2,7 @@ open! Core
 open! Import
 
 type t = { camera : Camera.t }
+type config = unit
 
 let create () =
   { camera =

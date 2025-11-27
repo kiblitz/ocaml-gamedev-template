@@ -10,4 +10,5 @@ end
 include struct
   open Scene_common
   module Scene_event = Event
+  module Scene_intf = Scene_intf
 end

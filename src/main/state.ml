@@ -1,12 +1,26 @@
 open! Core
 open! Import
 
+module Scene = struct
+  type ('scene, 'config) unpacked =
+    { module_ : (module Scene_intf.S with type t = 'scene and type config = 'config)
+    ; scene : 'scene
+    }
+
+  type t = T : _ unpacked -> t
+end
+
 type t =
-  { space_scene : Space_scene.t
+  { scene : Scene.t
   ; menu : Menu.t option
   }
 
-let create () = { space_scene = Space_scene.create (); menu = None }
+let create () =
+  { scene = T { module_ = (module Space_scene); scene = Space_scene.create () }
+  ; menu = None
+  }
+;;
+
 let is_finished (_ : t) = Raylib.window_should_close ()
 let is_paused t = Option.is_some t.menu
 
@@ -22,10 +36,12 @@ let update' t ~delta_time =
   let result = { With_game_event.value = t; game_event = Scene_event.Continue } in
   let result =
     update_result result ~f:(fun t ->
-      let { With_game_event.value = space_scene; game_event } =
-        Space_scene.update t.space_scene ~delta_time
+      let (T { Scene.module_ = (module M); scene }) = t.scene in
+      let { With_game_event.value = updated_scene; game_event } =
+        M.update scene ~delta_time
       in
-      { value = { t with space_scene }; game_event })
+      let updated_scene = Scene.T { module_ = (module M); scene = updated_scene } in
+      { value = { t with scene = updated_scene }; game_event })
   in
   let result =
     update_result result ~update_when_paused:true ~f:(fun t ->
@@ -53,8 +69,9 @@ let update t ~delta_time =
 ;;
 
 let draw t ~resource_manager =
+  let (T { Scene.module_ = (module M); scene }) = t.scene in
   Raylib.clear_background Raylib.Color.raywhite;
-  Space_scene.draw t.space_scene ~resource_manager;
+  M.draw scene ~resource_manager;
   Option.iter t.menu ~f:(fun menu -> Menu.draw menu ~resource_manager)
 ;;
 

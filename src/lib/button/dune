@@ -1,9 +1,5 @@
 (library
  (name button)
- (libraries
-  camera
-  common
-  core
-  raylib)
+ (libraries camera common core raylib)
  (preprocess
   (pps ppx_jane)))

@@ -27,7 +27,7 @@ let run () =
     let delta_time = Raylib.get_frame_time () |> Time_ns.Span.of_sec in
     let { With_game_event.value = state; game_event } = State.update ~delta_time state in
     Util.Draw.with_drawing (fun () -> State.draw state ~resource_manager);
-    match (game_event : State.Event.t) with
+    match (game_event : Scene_event.t) with
     | Continue -> loop state
     | Finished -> on_exit state
     | Finished_with_error error -> [ on_exit state; Error error ] |> Or_error.all_unit

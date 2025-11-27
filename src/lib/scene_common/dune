@@ -1,5 +1,5 @@
 (library
- (name menu)
+ (name scene_common)
  (libraries button camera common core raylib)
  (preprocess
   (pps ppx_jane)))

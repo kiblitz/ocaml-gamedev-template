@@ -6,8 +6,3 @@ include struct
   module With_game_event = With_game_event
   module Resource_manager = Resource_manager
 end
-
-include struct
-  open Scene_common
-  module Scene_event = Event
-end

@@ -1,5 +1,14 @@
 (library
  (name ocaml_gamedev_template_lib)
- (libraries camera common core menu raylib scene_common space_scene)
+ (libraries
+  camera
+  common
+  comms
+  core
+  domainslib
+  menu
+  raylib
+  scene_common
+  space_scene)
  (preprocess
-  (pps ppx_jane)))
+  (pps ppx_jane ppx_typed_fields)))

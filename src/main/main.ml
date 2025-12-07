@@ -24,9 +24,9 @@ end
 
 let on_exit state = State.on_exit state
 
-let run () =
+let run ~wait_ten =
   let { Setup.input_manager; resource_manager } = Setup.init_exn () in
-  let initial_state = State.create () in
+  let initial_state = State.create ~wait_ten () in
   let rec loop state =
     let delta_time = Raylib.get_frame_time () |> Time_ns.Span.of_sec in
     let { With_game_event.value = state; game_event } =

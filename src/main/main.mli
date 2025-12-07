@@ -1,3 +1,3 @@
 open! Core
 
-val run : unit -> unit Or_error.t
+val run : wait_ten:(unit, unit) Comms.t -> unit Or_error.t

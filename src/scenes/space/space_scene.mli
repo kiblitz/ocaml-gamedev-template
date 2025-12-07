@@ -1,3 +1,8 @@
 open! Core
 open Import
-include Scene_intf.S with type config = Unit.t
+
+type t
+
+val create : unit -> wait_ten:(unit, unit) Comms.t -> t
+
+include Scene_intf.S with type t := t

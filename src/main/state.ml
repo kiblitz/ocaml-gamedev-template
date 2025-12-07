@@ -2,8 +2,8 @@ open! Core
 open! Import
 
 module Scene = struct
-  type ('scene, 'config) unpacked =
-    { module_ : (module Scene_intf.S with type t = 'scene and type config = 'config)
+  type 'scene unpacked =
+    { module_ : (module Scene_intf.S with type t = 'scene)
     ; scene : 'scene
     }
 
@@ -15,8 +15,8 @@ type t =
   ; menu : Menu.t option
   }
 
-let create () =
-  { scene = T { module_ = (module Space_scene); scene = Space_scene.create () }
+let create () ~wait_ten =
+  { scene = T { module_ = (module Space_scene); scene = Space_scene.create ~wait_ten () }
   ; menu = None
   }
 ;;

@@ -1,5 +1,5 @@
 (library
  (name space_scene)
- (libraries camera common core menu raylib scene_common)
+ (libraries camera common comms core menu raylib scene_common)
  (preprocess
   (pps ppx_jane)))

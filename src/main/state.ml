@@ -32,13 +32,13 @@ let update_result
   if update_when_paused || not (is_paused result.value) then f result.value else result
 ;;
 
-let update' t ~delta_time =
+let update' t ~input_manager ~delta_time =
   let result = { With_game_event.value = t; game_event = Scene_event.Continue } in
   let result =
     update_result result ~f:(fun t ->
       let (T { Scene.module_ = (module M); scene }) = t.scene in
       let { With_game_event.value = updated_scene; game_event } =
-        M.update scene ~delta_time
+        M.update scene ~input_manager ~delta_time
       in
       let updated_scene = Scene.T { module_ = (module M); scene = updated_scene } in
       { value = { t with scene = updated_scene }; game_event })
@@ -48,24 +48,24 @@ let update' t ~delta_time =
       match t.menu with
       | Some menu ->
         let { With_game_event.value = new_menu; game_event } =
-          Menu.update menu ~delta_time
+          Menu.update menu ~input_manager ~delta_time
         in
         (match (game_event : Menu.Event.t) with
          | Resume -> { result with value = { t with menu = None } }
          | None -> { result with value = { t with menu = Some new_menu } }
          | Exit -> { result with game_event = Scene_event.Finished })
       | None ->
-        if Raylib.is_key_pressed Raylib.Key.Escape
+        if Input_manager.is_pressed input_manager ~action:Toggle_menu
         then { result with value = { t with menu = Some (Menu.create ()) } }
         else result)
   in
   result
 ;;
 
-let update t ~delta_time =
+let update t ~input_manager ~delta_time =
   match is_finished t with
   | true -> { With_game_event.value = t; game_event = Scene_event.Finished }
-  | false -> update' ~delta_time t
+  | false -> update' ~input_manager ~delta_time t
 ;;
 
 let draw t ~resource_manager =

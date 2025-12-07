@@ -40,8 +40,10 @@ let create () =
   { camera; exit_button }
 ;;
 
-let maybe_resume (_ : t) =
-  if Raylib.is_key_pressed Raylib.Key.Escape then Event.Resume else None
+let maybe_resume (_ : t) ~input_manager =
+  if Input_manager.is_pressed input_manager ~action:Toggle_menu
+  then Event.Resume
+  else None
 ;;
 
 let update_result (result : (t, Event.t) With_game_event.t) ~f =
@@ -51,19 +53,19 @@ let update_result (result : (t, Event.t) With_game_event.t) ~f =
   }
 ;;
 
-let update t ~delta_time =
+let update t ~input_manager ~delta_time =
   let result = { With_game_event.value = t; game_event = Event.None } in
   let result =
     update_result result ~f:(fun t ->
       let { With_game_event.value = updated_camera; game_event = () } =
-        Camera.update t.camera ~delta_time
+        Camera.update t.camera ~input_manager ~delta_time
       in
       { result with value = { t with camera = updated_camera } })
   in
   let result =
     update_result result ~f:(fun t ->
       let { With_game_event.value = updated_exit_button; game_event } =
-        Button.update t.exit_button ~delta_time
+        Button.update t.exit_button ~input_manager ~delta_time
       in
       let game_event =
         match (game_event : Button.Event.t) with
@@ -73,7 +75,7 @@ let update t ~delta_time =
       { With_game_event.value = { t with exit_button = updated_exit_button }; game_event })
   in
   update_result result ~f:(fun t ->
-    { With_game_event.value = t; game_event = maybe_resume t })
+    { With_game_event.value = t; game_event = maybe_resume t ~input_manager })
 ;;
 
 let draw t ~resource_manager =

@@ -5,7 +5,11 @@ module Updatable = struct
     type t
     type event
 
-    val update : t -> delta_time:Time_ns.Span.t -> (t, event) With_game_event.t
+    val update
+      :  t
+      -> input_manager:Input_manager.t
+      -> delta_time:Time_ns.Span.t
+      -> (t, event) With_game_event.t
   end
 end
 

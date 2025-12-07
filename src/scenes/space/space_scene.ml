@@ -17,12 +17,12 @@ let create () =
 
 let update_result (result : (t, Scene_event.t) With_game_event.t) ~f = f result.value
 
-let update t ~delta_time =
+let update t ~input_manager ~delta_time =
   let result = { With_game_event.value = t; game_event = Scene_event.Continue } in
   let result =
     update_result result ~f:(fun t ->
       let { With_game_event.value = new_camera; game_event = () } =
-        Camera.update t.camera ~delta_time
+        Camera.update t.camera ~input_manager ~delta_time
       in
       { result with value = { camera = new_camera } })
   in

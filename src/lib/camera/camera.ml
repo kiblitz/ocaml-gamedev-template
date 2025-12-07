@@ -45,7 +45,7 @@ let draw_with t ~f =
   Raylib.end_mode_2d ()
 ;;
 
-let update t ~delta_time =
+let update t ~input_manager:_ ~delta_time =
   let lerp = Util.Smooth.lerp ~delta_time in
   let new_position =
     let x, y =

@@ -35,7 +35,7 @@ let create
   { camera; bounds; state = None; images; image_source_bounds; image_color_tints }
 ;;
 
-let update t ~delta_time:_ =
+let update t ~input_manager ~delta_time:_ =
   let new_state =
     let x, y =
       let x = Raylib.get_mouse_x () |> Int.to_float in
@@ -47,9 +47,9 @@ let update t ~delta_time:_ =
     match Util.Collision.point_in_bounds ~x ~y ~bounds:t.bounds with
     | false -> Event.None
     | true ->
-      if Raylib.is_mouse_button_down Raylib.MouseButton.Left
+      if Input_manager.is_down input_manager ~action:Select
       then Event.Held
-      else if Raylib.is_mouse_button_released Raylib.MouseButton.Left
+      else if Input_manager.is_released input_manager ~action:Select
       then Event.Pressed
       else Event.Hover
   in

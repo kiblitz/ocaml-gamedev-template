@@ -11,7 +11,15 @@
 
 (package
  (name ocaml-gamedev-template)
+ (depends
+  (core (= v0.17.1))
+  (core_kernel (= v0.17.0))
+  (crunch (= 4.0.0))
+  (domainslib (= 0.5.2))
+  (ocaml (= 5.2.1))
+  (ocamlformat (= 0.28.1))
+  (ppx_typed_fields (= v0.17.0))
+  (raylib (= 1.5.1)))
  (synopsis "A template for OCaml gamedev")
  (description "Using raylib")
- (depends ocaml)
  (tags (gamedev template)))

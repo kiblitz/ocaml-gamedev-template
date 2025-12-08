@@ -11,7 +11,14 @@ doc: "https://github.com/kiblitz/ocaml-gamedev-template"
 bug-reports: "https://github.com/kiblitz/ocaml-gamedev-template/issues"
 depends: [
   "dune" {>= "3.18"}
-  "ocaml"
+  "core" {= "v0.17.1"}
+  "core_kernel" {= "v0.17.0"}
+  "crunch" {= "4.0.0"}
+  "domainslib" {= "0.5.2"}
+  "ocaml" {= "5.2.1"}
+  "ocamlformat" {= "0.28.1"}
+  "ppx_typed_fields" {= "v0.17.0"}
+  "raylib" {= "1.5.1"}
   "odoc" {with-doc}
 ]
 build: [
@@ -30,3 +37,6 @@ build: [
 ]
 dev-repo: "git+https://github.com/kiblitz/ocaml-gamedev-template.git"
 x-maintenance-intent: ["(latest)"]
+pin-depends: [
+  [ "base_bigstring.v0.17.0" "git+https://github.com/kiblitz/win-base_bigstring#v0.17" ]
+]

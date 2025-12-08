@@ -1,0 +1,3 @@
+pin-depends: [
+  [ "base_bigstring.v0.17.0" "git+https://github.com/kiblitz/win-base_bigstring#v0.17" ]
+]
